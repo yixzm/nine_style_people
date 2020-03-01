@@ -1,1 +1,0 @@
-<script>location.href='http://www.yixzm.cn/welcom/error'</script>

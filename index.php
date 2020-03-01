@@ -15,19 +15,50 @@
  * 原版说明：https://blog.csdn.net/dreamstone_xiaoqw/article/details/83903609
  */
 
-if (isset($_GET['api'])) {
-    require_once(__DIR__ . "/nine_style/api/q_144.php");
-    $api = $_GET['api'];
-    switch ($api) {
-        case "get_9style_people_question":
-            echo get_9style_people_question();
-        case "get_9style_people_info":
-            echo get_9style_people_info();
-        case "post_9style_people_result":
-            echo post_9style_people_result();
-        default:
-            return null;
-    }
-} else {
-    require_once(__DIR__ . "/nine_style/view/q_144.html");
+function get_lib_path($mark)
+{
+    return "./db/" . $mark . ".php";
+}
+
+$api = isset($_GET['api']) ? $_GET['api'] : 'view';
+
+switch ($api) {
+    case "qi": {
+            $qid = isset($_GET['qid']) ? (int) $_GET['qid'] : -1;
+            if ($qid >= 0 && $qid < 144) {
+                require_once(get_lib_path("question"));
+                echo json_encode([$question[$_GET['qid']]], JSON_UNESCAPED_UNICODE);
+            }
+        }
+        break;
+    case "ii": {
+            $typeID = isset($_GET['typeID']) ? (int) $_GET['typeID'] : -1;
+            if ($typeID >= 0 && $typeID < 9) {
+                require_once(get_lib_path("info"));
+                echo json_encode([$question[$_GET['typeID']]], JSON_UNESCAPED_UNICODE);
+            }
+        }
+        break;
+    case "rm": {
+            $result = isset($_POST['result']) ? $_POST['result'] : null;
+            if ($result != null) {
+                $response = json_decode($result);
+                require_once(get_lib_path("answer"));
+                $score = [
+                    'A' => 0, 'B' => 0, 'C' => 0,
+                    /** 9-6-3 */
+                    'D' => 0, 'E' => 0, 'F' => 0,
+                    /** 1-4-2 */
+                    'G' => 0, 'H' => 0, 'I' => 0,
+                    /** 8-5-7 */
+                ];
+                for ($i = 0; $i < count($response); $i++) {
+                    ++$score[$answer[$i][$response[$i]]];
+                }
+                echo json_encode($score);
+            }
+        }
+        break;
+    default:
+        require_once(__DIR__ . "/static/jx.html");
 }
