@@ -11,8 +11,8 @@
 @site:   http://www.yixzm.cn
 
 @blog:
-* 源码讲解：https://blog.csdn.net/dreamstone_xiaoqw/article/details/90046498
-* 原版说明：https://blog.csdn.net/dreamstone_xiaoqw/article/details/83903609
+* 源码讲解：http://www.yixzm.cn/index/reading/article/story/206
+* 原版说明：http://www.yixzm.cn/index/reading/article/story/205
 
 # 安装
 
