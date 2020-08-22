@@ -24,6 +24,8 @@
 
 访问地址：http://localhost/nine_style_people/
 
+在线demo： http://www.yixzm.cn/d/jxrg-opensource.html
+
 # 更新日志
 
 [2020-03-09] 很多没有编程基础的同学安装后都会出现请求地址弄不好的问题，So，开放支持跨域的Open API解决一切问题~
